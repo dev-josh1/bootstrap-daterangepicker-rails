@@ -19,6 +19,7 @@
         this.minDate = false;
         this.maxDate = false;
         this.dateLimit = false;
+        this.showYear = true;
 
         this.showDropdowns = false;
         this.showWeekNumbers = false;
@@ -189,6 +190,10 @@
 
             if (typeof options.showWeekNumbers == 'boolean') {
                 this.showWeekNumbers = options.showWeekNumbers;
+            }
+
+            if (typeof options.showYear == 'boolean') {
+                this.showYear = options.showYear;
             }
 
             if (typeof options.buttonClasses == 'string') {
@@ -721,8 +726,11 @@
             } else {
                 html += '<th></th>';
             }
-
-            var dateHtml = this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" YYYY");
+            
+            var dateHtml = this.locale.monthNames[calendar[1][1].month()];
+            if (this.showYear) {
+                dateHtml += calendar[1][1].format(" YYYY");
+            }
 
             if (this.showDropdowns) {
                 dateHtml = this.renderDropdowns(calendar[1][1], minDate, maxDate);
